@@ -23,6 +23,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -87,6 +88,12 @@
             <span class="stepper-label">Compliance &amp; docs</span>
           </li>
         </ol>
+
+        <!-- Form errors banner -->
+        <div class="form-errors-banner" id="form-errors-banner" hidden role="alert">
+          <strong>Please fix the highlighted fields below before continuing.</strong>
+          <ul id="form-errors-list"></ul>
+        </div>
 
         <!-- Form -->
         <form id="vendor-form" class="vendor-form" action="https://formsubmit.co/vendors@sagacityeffect.com" method="POST" enctype="multipart/form-data" novalidate>
@@ -563,6 +570,7 @@
       <div>
         <h4>Get in touch</h4>
         <ul>
+          <li><a href="mailto:contact@sagacityeffect.com">contact@…</a> (general)</li>
           <li><a href="mailto:contracts@sagacityeffect.com">contracts@…</a></li>
           <li><a href="mailto:vendors@sagacityeffect.com">vendors@…</a></li>
           <li><a href="mailto:hello@sagacityeffect.com">hello@…</a></li>

@@ -1577,3 +1577,42 @@ section .section-lede {
 }
 .form-save-status.saving .save-dot { background: var(--accent); }
 .form-save-status.saved .save-dot { background: #6d9a6d; }
+
+/* Form errors banner (top of form) */
+.form-errors-banner {
+  margin-bottom: 32px;
+  padding: 18px 22px;
+  background: rgba(179, 80, 43, 0.10);
+  border: 1px solid rgba(179, 80, 43, 0.35);
+  border-radius: var(--radius);
+  color: #8a3d20;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.form-errors-banner strong {
+  display: block;
+  font-size: 15px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.form-errors-banner ul {
+  list-style: disc;
+  padding-left: 22px;
+  margin: 0;
+}
+.form-errors-banner li {
+  margin-bottom: 4px;
+}
+.form-errors-banner li:last-child { margin-bottom: 0; }
+[data-theme="dark"] .form-errors-banner { color: #e3a78d; }
+
+/* Invalid field pulse (catch attention when validation fails) */
+.invalid {
+  animation: invalidPulse 600ms ease-out;
+}
+@keyframes invalidPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(179, 80, 43, 0.4); }
+  50%  { box-shadow: 0 0 0 6px rgba(179, 80, 43, 0.20); }
+  100% { box-shadow: 0 0 0 0 rgba(179, 80, 43, 0); }
+}

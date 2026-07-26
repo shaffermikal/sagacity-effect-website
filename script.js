@@ -91,6 +91,7 @@
     if (!stepEl) return true;
     var fields = stepEl.querySelectorAll('input, select, textarea');
     var firstInvalid = null;
+    var invalidFields = [];
     var groupErrors = {};
 
     fields.forEach(function (f) {
@@ -110,7 +111,10 @@
         return;
       }
       if (f.type === 'file') {
-        return; // file inputs validated separately
+        // File inputs validated separately (only when submitting)
+        f.classList.remove('invalid');
+        if (group) group.classList.remove('has-error');
+        return;
       }
 
       // Standard required field check
@@ -132,6 +136,7 @@
       if (!valid) {
         f.classList.add('invalid');
         if (group) group.classList.add('has-error');
+        invalidFields.push(f);
         if (!firstInvalid) firstInvalid = f;
       } else {
         f.classList.remove('invalid');
@@ -171,10 +176,75 @@
       }
     }
 
+    // Show or hide the errors banner
+    if (invalidFields.length > 0 || Object.keys(groupErrors).length > 0) {
+      showValidationErrors(stepEl, invalidFields);
+    } else {
+      hideValidationErrors();
+    }
+
     if (firstInvalid) {
       try { firstInvalid.focus({ preventScroll: true }); } catch (e) { firstInvalid.focus(); }
+      // Scroll the field into view (top-aligned, below the header)
+      setTimeout(function () {
+        var rect = firstInvalid.getBoundingClientRect();
+        var top = rect.top + window.scrollY - 120;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }, 50);
     }
     return !firstInvalid;
+  }
+
+  function showValidationErrors(stepEl, invalidFields) {
+    var banner = document.getElementById('form-errors-banner');
+    var list = document.getElementById('form-errors-list');
+    if (!banner || !list) return;
+
+    // Build a list of human-readable field names
+    var items = invalidFields.map(function (f) {
+      var label = f.closest('.form-group');
+      if (label) {
+        var lbl = label.querySelector('label');
+        if (lbl) {
+          return lbl.textContent.replace(/\*/g, '').replace(/\s+/g, ' ').trim();
+        }
+      }
+      return f.name || f.id || 'Unknown field';
+    });
+
+    // Add group errors (e.g., "NAICS lanes")
+    var stepGroups = stepEl.querySelectorAll('.form-group');
+    stepGroups.forEach(function (g) {
+      var errEl = g.querySelector('.form-error');
+      if (errEl && errEl.style.display === 'block' && g.querySelector('.checkbox-grid, .checkbox-stack')) {
+        var lbl = g.querySelector('label');
+        if (lbl) {
+          items.push(lbl.textContent.replace(/\*/g, '').replace(/\s+/g, ' ').trim() + ' (select at least one)');
+        }
+      }
+    });
+
+    if (items.length === 0) {
+      banner.hidden = true;
+      return;
+    }
+
+    list.innerHTML = items.map(function (t) { return '<li>' + t + '</li>'; }).join('');
+    banner.hidden = false;
+
+    // Scroll the banner into view (just below the header)
+    setTimeout(function () {
+      var rect = banner.getBoundingClientRect();
+      if (rect.top < 100 || rect.top > window.innerHeight) {
+        var top = rect.top + window.scrollY - 120;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+    }, 60);
+  }
+
+  function hideValidationErrors() {
+    var banner = document.getElementById('form-errors-banner');
+    if (banner) banner.hidden = true;
   }
 
   // ---------------------------------------------------------
@@ -401,6 +471,208 @@
   }
 
   // ---------------------------------------------------------
+  //  PDF generation (client-side via jsPDF)
+  // ---------------------------------------------------------
+  function getVal(name) {
+    var el = form.querySelector('[name="' + name + '"]');
+    return el ? (el.value || '').trim() : '';
+  }
+  function getRadio(name) {
+    var el = form.querySelector('input[name="' + name + '"]:checked');
+    return el ? el.value : '';
+  }
+  function getCheckedValues(name) {
+    var els = form.querySelectorAll('input[name="' + name + '"]:checked');
+    return Array.prototype.slice.call(els).map(function (e) { return e.value; });
+  }
+  function getContractNumber(n) {
+    var block = form.querySelector('.contract-block[data-contract="' + n + '"]');
+    if (!block) return null;
+    return {
+      type:        getRadio('contract' + n + '_type') || 'federal',
+      client:      getVal('contract' + n + '_client'),
+      number:      getVal('contract' + n + '_number'),
+      naics:       getVal('contract' + n + '_naics'),
+      value:       getVal('contract' + n + '_value'),
+      cpars:       getVal('contract' + n + '_cpars'),
+      start:       getVal('contract' + n + '_start'),
+      end:         getVal('contract' + n + '_end'),
+      description: getVal('contract' + n + '_description'),
+      reference:   getVal('contract' + n + '_reference')
+    };
+  }
+
+  function generateApplicationPDF() {
+    // Bail gracefully if jsPDF didn't load (e.g., CDN blocked)
+    if (typeof window.jspdf === 'undefined' || !window.jspdf.jsPDF) {
+      return null;
+    }
+    var jsPDF = window.jspdf.jsPDF;
+    var doc = new jsPDF({ unit: 'mm', format: 'letter' });
+    var pageW = doc.internal.pageSize.getWidth();
+    var pageH = doc.internal.pageSize.getHeight();
+    var margin = 14;
+    var contentW = pageW - margin * 2;
+    var y = margin;
+
+    function addRule(thickness) {
+      doc.setDrawColor(180, 160, 130);
+      doc.setLineWidth(thickness || 0.3);
+      doc.line(margin, y, pageW - margin, y);
+      y += 4;
+    }
+    function addSpace(h) { y += h || 4; }
+
+    function addSectionTitle(title) {
+      if (y > pageH - 30) { doc.addPage(); y = margin; }
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(13);
+      doc.setTextColor(139, 90, 43);
+      doc.text(title, margin, y);
+      y += 6;
+      addRule(0.5);
+    }
+
+    function addField(label, value) {
+      if (y > pageH - 16) { doc.addPage(); y = margin; }
+      var val = (value && String(value).trim()) ? String(value).trim() : '—';
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9);
+      doc.setTextColor(60, 50, 40);
+      doc.text(label, margin, y);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(30, 30, 35);
+      var lines = doc.splitTextToSize(val, contentW - 50);
+      doc.text(lines, margin + 50, y);
+      y += Math.max(5, lines.length * 4.2) + 2;
+    }
+
+    function addFieldFull(label, value) {
+      if (y > pageH - 16) { doc.addPage(); y = margin; }
+      var val = (value && String(value).trim()) ? String(value).trim() : '—';
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9);
+      doc.setTextColor(60, 50, 40);
+      doc.text(label, margin, y);
+      y += 4;
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(30, 30, 35);
+      var lines = doc.splitTextToSize(val, contentW);
+      doc.text(lines, margin, y);
+      y += lines.length * 4.2 + 3;
+    }
+
+    // ---------- Header ----------
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(18);
+    doc.setTextColor(20, 20, 25);
+    doc.text('Vendor Application', margin, y);
+    y += 6;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(11);
+    doc.setTextColor(100, 100, 100);
+    doc.text('Sagacity Effect LLC', margin, y);
+    y += 4;
+    doc.setFontSize(9);
+    doc.text('Submitted: ' + new Date().toLocaleString(), margin, y);
+    y += 6;
+    addRule(0.8);
+    addSpace(2);
+
+    // ---------- Step 1: Company ----------
+    addSectionTitle('1. Company Information');
+    addField('Legal name', getVal('legal_name'));
+    addField('DBA', getVal('dba'));
+    addField('SAM.gov UEI', getVal('uei'));
+    addField('CAGE code', getVal('cage'));
+    addField('Primary NAICS', getVal('primary_naics'));
+    addField('Secondary NAICS', getVal('secondary_naics'));
+    addField('Years in business', getVal('years_in_business'));
+    addField('Employees', getVal('employees'));
+    addField('Annual revenue', getVal('revenue'));
+    addField('State of incorp.', getVal('state_incorp'));
+    addField('Address', getVal('addr1'));
+    addField('City / State / ZIP',
+      getVal('city') + ', ' + getVal('state') + ' ' + getVal('zip'));
+    addSpace(2);
+
+    // ---------- Step 2: Contact ----------
+    addSectionTitle('2. Primary Contact');
+    addField('Name', getVal('contact_name'));
+    addField('Title', getVal('contact_title'));
+    addField('Email', getVal('contact_email'));
+    addField('Phone', getVal('contact_phone'));
+    addField('Website', getVal('website'));
+    addSpace(2);
+
+    // ---------- Step 3: Capabilities ----------
+    addSectionTitle('3. Capabilities & Coverage');
+    var lanes = getCheckedValues('lanes');
+    addField('NAICS lanes', lanes.length ? lanes.join(', ') : '—');
+    addField('Coverage', getRadio('coverage'));
+    addField('States served', getVal('states_served'));
+    addField('Contract size', getRadio('contract_size'));
+    addFieldFull('Capability summary', getVal('capability_summary'));
+    addSpace(2);
+
+    // ---------- Step 4: Past performance ----------
+    addSectionTitle('4. Past Performance');
+    for (var i = 1; i <= 3; i++) {
+      var c = getContractNumber(i);
+      if (!c || !c.client) continue;  // skip empty contracts
+      addField('Contract ' + i + ' type', c.type);
+      addField('Client / agency', c.client);
+      addField('Contract #', c.number);
+      addField('NAICS', c.naics);
+      addField('Value', c.value ? '$' + Number(c.value).toLocaleString() : '');
+      addField('CPARS rating', c.cpars);
+      addField('Period', c.start + ' – ' + c.end);
+      addFieldFull('Description', c.description);
+      addField('Reference', c.reference);
+      addSpace(2);
+    }
+    addSpace(2);
+
+    // ---------- Step 5: Compliance ----------
+    addSectionTitle('5. Compliance & Documents');
+    addField('SAM.gov status', getRadio('sam_status'));
+    addField('Debarment attestation',
+      (form.querySelector('input[name="exclusion_attestation"]:checked') ? 'Attested' : 'Not attested'));
+    var ins = getCheckedValues('insurance');
+    addField('Insurance', ins.length ? ins.join(', ').toUpperCase() : '—');
+    var certs = getCheckedValues('certifications');
+    addField('Certifications', certs.length ? certs.join(', ').toUpperCase() : '—');
+    addField('Terms accepted',
+      (form.querySelector('input[name="terms"]:checked') ? 'Yes' : 'No'));
+
+    // Files attached
+    addFieldFull('Files attached', (function () {
+      var files = ['capability_statement', 'w9', 'insurance_cert', 'cpars', 'certifications_docs'];
+      var present = [];
+      files.forEach(function (n) {
+        var el = form.querySelector('input[name="' + n + '"]');
+        if (el && el.files && el.files[0]) {
+          present.push(n.replace(/_/g, ' ') + ': ' + el.files[0].name);
+        }
+      });
+      return present.length ? present.join('\n') : '—';
+    })());
+
+    // ---------- Footer ----------
+    var totalPages = doc.internal.getNumberOfPages();
+    for (var p = 1; p <= totalPages; p++) {
+      doc.setPage(p);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8);
+      doc.setTextColor(140, 140, 140);
+      doc.text('Sagacity Effect LLC · Vendor Application · Page ' + p + ' of ' + totalPages,
+               margin, pageH - 8);
+    }
+
+    return doc.output('blob');
+  }
+
+  // ---------------------------------------------------------
   //  Submit
   // ---------------------------------------------------------
   if (submitBtn) {
@@ -409,63 +681,92 @@
       if (!validateStep(currentStep)) return;
 
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Submitting…';
-      showFormStatus('success', '<strong>Sending your application…</strong> Please don\'t close this tab.');
+      submitBtn.textContent = 'Building PDF…';
+      showFormStatus('success', '<strong>Generating your application PDF…</strong> One moment.');
 
-      // Build FormData
-      var fd = new FormData(form);
+      // Generate PDF (deferred so the UI can update)
+      setTimeout(function () {
+        var pdfBlob = null;
+        try {
+          pdfBlob = generateApplicationPDF();
+        } catch (e) {
+          console.error('PDF generation failed:', e);
+        }
 
-      // Strip existing checkbox arrays (they're already in fd as separate entries)
-      // Add FormSubmit meta fields
-      fd.append('_subject', 'New vendor application — Sagacity Effect');
-      fd.append('_template', 'table');
-      fd.append('_captcha', 'false');
-      fd.append('_next', window.location.origin + '/apply.html?submitted=true');
-      // Honeypot (must remain empty)
-      fd.append('_honey', '');
+        submitBtn.textContent = 'Submitting…';
+        showFormStatus('success', '<strong>Sending your application…</strong> Please don\'t close this tab.');
 
-      // Submit via fetch (AJAX)
-      var url = 'https://formsubmit.co/ajax/vendors@sagacityeffect.com';
-      fetch(url, {
-        method: 'POST',
-        body: fd,
-        headers: { 'Accept': 'application/json' }
-      })
-      .then(function (r) {
-        if (!r.ok) throw new Error('HTTP ' + r.status);
-        return r.json();
-      })
-      .then(function () {
-        // Success
-        showFormStatus('success',
-          '<strong>Application received — thank you.</strong><br>' +
-          'We\'ll review your application within 5 business days. ' +
-          'If we need anything else, we\'ll reach out to the contact you provided. ' +
-          'In the meantime, you can <a href="capabilities.html">see what we bid on</a> or ' +
-          '<a href="index.html">return home</a>.'
-        );
-        // Clear saved form
-        try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
-        // Lock the form
-        form.querySelectorAll('input, select, textarea, button').forEach(function (el) {
-          el.disabled = true;
+        // Build FormData
+        var fd = new FormData(form);
+
+        // Attach the generated PDF (if jsPDF was available)
+        if (pdfBlob) {
+          var company = (getVal('legal_name') || 'vendor').replace(/[^a-z0-9]+/gi, '-').toLowerCase();
+          var ts = new Date().toISOString().slice(0, 10);
+          var pdfName = 'application-' + company + '-' + ts + '.pdf';
+          fd.append('application_pdf', pdfBlob, pdfName);
+        }
+
+        // FormSubmit meta fields
+        fd.append('_subject', 'New vendor application — Sagacity Effect');
+        fd.append('_template', 'table');
+        fd.append('_captcha', 'false');
+        fd.append('_next', window.location.origin + '/apply.html?submitted=true');
+        // Honeypot (must remain empty)
+        fd.append('_honey', '');
+
+        // Submit via fetch (AJAX)
+        var url = 'https://formsubmit.co/ajax/vendors@sagacityeffect.com';
+        fetch(url, {
+          method: 'POST',
+          body: fd,
+          headers: { 'Accept': 'application/json' }
+        })
+        .then(function (r) {
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          return r.json();
+        })
+        .then(function () {
+          // Success — also offer a download of the PDF for the user's records
+          var pdfDownload = '';
+          if (pdfBlob) {
+            try {
+              var pdfUrl = URL.createObjectURL(pdfBlob);
+              pdfDownload = '<br><br><a href="' + pdfUrl + '" download="my-application.pdf" class="btn btn-secondary" style="display:inline-block;margin-top:12px;">↓ Download a copy of your application</a>';
+            } catch (e) {}
+          }
+          showFormStatus('success',
+            '<strong>Application received — thank you.</strong><br>' +
+            'We\'ll review your application within 5 business days. ' +
+            'If we need anything else, we\'ll reach out to the contact you provided. ' +
+            'In the meantime, you can <a href="capabilities.html">see what we bid on</a> or ' +
+            '<a href="index.html">return home</a>.' +
+            pdfDownload
+          );
+          // Clear saved form
+          try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+          // Lock the form
+          form.querySelectorAll('input, select, textarea, button').forEach(function (el) {
+            el.disabled = true;
+          });
+          submitBtn.style.display = 'none';
+          prevBtn.style.display = 'none';
+          nextBtn.style.display = 'none';
+          var saveStatusEl = document.querySelector('.form-save-status');
+          if (saveStatusEl) saveStatusEl.style.display = 'none';
+          // Scroll to success
+          formStatus.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        })
+        .catch(function (err) {
+          showFormStatus('error',
+            '<strong>Something went wrong sending the form.</strong><br>' +
+            'Please try again, or email <a href="mailto:vendors@sagacityeffect.com">vendors@sagacityeffect.com</a> ' +
+            'directly and we\'ll get you sorted. (Error: ' + (err.message || 'network') + ')'
+          );
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit Application →';
         });
-        submitBtn.style.display = 'none';
-        prevBtn.style.display = 'none';
-        nextBtn.style.display = 'none';
-        document.querySelector('.form-save-status').style.display = 'none';
-        // Scroll to success
-        formStatus.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      })
-      .catch(function (err) {
-        showFormStatus('error',
-          '<strong>Something went wrong sending the form.</strong><br>' +
-          'Please try again, or email <a href="mailto:vendors@sagacityeffect.com">vendors@sagacityeffect.com</a> ' +
-          'directly and we\'ll get you sorted. (Error: ' + (err.message || 'network') + ')'
-        );
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Submit Application →';
-      });
+      }, 100);
     });
   }
 
