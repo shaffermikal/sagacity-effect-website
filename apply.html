@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vendor Application — Sagacity Effect LLC</title>
+  <meta name="description" content="Apply to join Sagacity Effect's subcontractor network. Five-step guided application for federal contracting vendors — company info, capabilities, past performance, compliance, and document upload." />
+  <meta name="theme-color" content="#f7f2e8" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#15110b" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%238b5a2b'/%3E%3Ctext x='50' y='65' font-family='serif' font-size='52' font-weight='600' font-style='italic' fill='%23fdfaf3' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E" />
+  <script>
+    (function() {
+      try {
+        var saved = localStorage.getItem('sagacity-theme');
+        var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="brand" aria-label="Sagacity Effect LLC — Home">
+        <img src="assets/logo-original.jpg" alt="Sagacity Effect logo" class="brand-img" width="200" height="auto" />
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">Menu</button>
+      <nav>
+        <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="capabilities.html">Capabilities</a></li>
+          <li><a href="vendors.html">Vendors</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li>
+            <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+              <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+              <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <section class="page-hero">
+      <div class="container">
+        <p class="eyebrow">Vendor Application</p>
+        <h1>Apply to join the <span class="accent">network.</span></h1>
+        <p class="lede">Five short steps. About 10–15 minutes. We'll review your application within 5 business days. Save and resume any time — your progress is kept on this device.</p>
+      </div>
+    </section>
+
+    <section style="padding-top: 32px;">
+      <div class="container container-narrow">
+
+        <!-- Stepper -->
+        <ol class="stepper" aria-label="Application progress">
+          <li class="stepper-item active" data-step="1">
+            <span class="stepper-num">1</span>
+            <span class="stepper-label">Company</span>
+          </li>
+          <li class="stepper-item" data-step="2">
+            <span class="stepper-num">2</span>
+            <span class="stepper-label">Contact</span>
+          </li>
+          <li class="stepper-item" data-step="3">
+            <span class="stepper-num">3</span>
+            <span class="stepper-label">Capabilities</span>
+          </li>
+          <li class="stepper-item" data-step="4">
+            <span class="stepper-num">4</span>
+            <span class="stepper-label">Past work</span>
+          </li>
+          <li class="stepper-item" data-step="5">
+            <span class="stepper-num">5</span>
+            <span class="stepper-label">Compliance &amp; docs</span>
+          </li>
+        </ol>
+
+        <!-- Form -->
+        <form id="vendor-form" class="vendor-form" action="https://formsubmit.co/vendors@sagacityeffect.com" method="POST" enctype="multipart/form-data" novalidate>
+          <input type="hidden" name="_subject" value="New vendor application — Sagacity Effect" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_next" value="https://sagacityeffect.com/apply.html?submitted=true" />
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+
+          <!-- ============================================
+               STEP 1: COMPANY INFORMATION
+               ============================================ -->
+          <fieldset class="form-step active" data-step="1">
+            <legend class="form-step-title">
+              <span class="step-tag">Step 1 of 5</span>
+              <h2>Company information</h2>
+              <p>Legal identity, SAM.gov registration, and how your business is structured.</p>
+            </legend>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="legal_name">Legal company name <span class="req">*</span></label>
+                <input type="text" id="legal_name" name="legal_name" required autocomplete="organization" />
+              </div>
+              <div class="form-group">
+                <label for="dba">DBA / alternate name</label>
+                <input type="text" id="dba" name="dba" placeholder="If different from legal name" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="uei">SAM.gov UEI <span class="req">*</span></label>
+                <input type="text" id="uei" name="uei" required pattern="[A-Z0-9]{12}" maxlength="12" placeholder="12-character Unique Entity ID" style="font-family: var(--font-mono); text-transform: uppercase;" />
+                <p class="form-hint">12 characters. Find it at <a href="https://sam.gov" target="_blank" rel="noopener">sam.gov</a>.</p>
+              </div>
+              <div class="form-group">
+                <label for="cage">CAGE code</label>
+                <input type="text" id="cage" name="cage" pattern="[A-Z0-9]{5}" maxlength="5" placeholder="5-character code (if assigned)" style="font-family: var(--font-mono); text-transform: uppercase;" />
+                <p class="form-hint">Issued automatically with SAM.gov registration.</p>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="primary_naics">Primary NAICS code <span class="req">*</span></label>
+                <input type="text" id="primary_naics" name="primary_naics" required pattern="\d{5,6}" maxlength="6" placeholder="e.g. 561720" style="font-family: var(--font-mono);" />
+                <p class="form-hint">Your main 5- or 6-digit NAICS. <a href="https://www.naics.com/search/" target="_blank" rel="noopener">Look it up →</a></p>
+              </div>
+              <div class="form-group">
+                <label for="secondary_naics">Secondary NAICS codes</label>
+                <input type="text" id="secondary_naics" name="secondary_naics" placeholder="e.g. 541611, 561210, 541614" style="font-family: var(--font-mono);" />
+                <p class="form-hint">Comma-separated. List all that apply.</p>
+              </div>
+            </div>
+
+            <div class="form-row form-row-3">
+              <div class="form-group">
+                <label for="years_in_business">Years in business <span class="req">*</span></label>
+                <input type="number" id="years_in_business" name="years_in_business" required min="0" max="200" />
+              </div>
+              <div class="form-group">
+                <label for="employees">Number of employees <span class="req">*</span></label>
+                <input type="number" id="employees" name="employees" required min="0" max="100000" />
+                <p class="form-hint">Full-time equivalents.</p>
+              </div>
+              <div class="form-group">
+                <label for="revenue">Annual revenue <span class="req">*</span></label>
+                <select id="revenue" name="revenue" required>
+                  <option value="">Choose one</option>
+                  <option>Under $100K</option>
+                  <option>$100K – $500K</option>
+                  <option>$500K – $1M</option>
+                  <option>$1M – $5M</option>
+                  <option>$5M – $10M</option>
+                  <option>$10M – $50M</option>
+                  <option>Over $50M</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="state_incorp">State of incorporation <span class="req">*</span></label>
+              <input type="text" id="state_incorp" name="state_incorp" required placeholder="e.g. Illinois" />
+            </div>
+
+            <div class="form-group">
+              <label>Business address <span class="req">*</span></label>
+              <input type="text" id="addr1" name="addr1" required placeholder="Street address" autocomplete="address-line1" />
+            </div>
+            <div class="form-row form-row-3">
+              <div class="form-group" style="grid-column: span 2;">
+                <label for="city">City <span class="req">*</span></label>
+                <input type="text" id="city" name="city" required autocomplete="address-level2" />
+              </div>
+              <div class="form-group">
+                <label for="state">State <span class="req">*</span></label>
+                <input type="text" id="state" name="state" required maxlength="2" placeholder="IL" style="text-transform: uppercase;" autocomplete="address-level1" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="zip">ZIP code <span class="req">*</span></label>
+              <input type="text" id="zip" name="zip" required pattern="\d{5}(-\d{4})?" maxlength="10" autocomplete="postal-code" />
+            </div>
+          </fieldset>
+
+          <!-- ============================================
+               STEP 2: PRIMARY CONTACT
+               ============================================ -->
+          <fieldset class="form-step" data-step="2">
+            <legend class="form-step-title">
+              <span class="step-tag">Step 2 of 5</span>
+              <h2>Primary contact</h2>
+              <p>The person Sagacity Effect will reach out to about teaming, contracts, and admin.</p>
+            </legend>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contact_name">Full name <span class="req">*</span></label>
+                <input type="text" id="contact_name" name="contact_name" required autocomplete="name" />
+              </div>
+              <div class="form-group">
+                <label for="contact_title">Title <span class="req">*</span></label>
+                <input type="text" id="contact_title" name="contact_title" required placeholder="e.g. President, VP Operations" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contact_email">Email <span class="req">*</span></label>
+                <input type="email" id="contact_email" name="contact_email" required autocomplete="email" />
+              </div>
+              <div class="form-group">
+                <label for="contact_phone">Phone <span class="req">*</span></label>
+                <input type="tel" id="contact_phone" name="contact_phone" required autocomplete="tel" placeholder="(555) 555-5555" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="website">Company website</label>
+              <input type="url" id="website" name="website" placeholder="https://" />
+            </div>
+          </fieldset>
+
+          <!-- ============================================
+               STEP 3: CAPABILITIES & COVERAGE
+               ============================================ -->
+          <fieldset class="form-step" data-step="3">
+            <legend class="form-step-title">
+              <span class="step-tag">Step 3 of 5</span>
+              <h2>Capabilities &amp; coverage</h2>
+              <p>What you do, where you do it, and the scale of work you can take on.</p>
+            </legend>
+
+            <div class="form-group">
+              <label>Which Sagacity Effect NAICS lanes fit you? <span class="req">*</span></label>
+              <p class="form-hint" style="margin-bottom: 16px;">Select all that apply. <a href="capabilities.html" target="_blank">See what each lane means →</a></p>
+              <div class="checkbox-grid">
+                <label class="check"><input type="checkbox" name="lanes" value="561720" /><span><strong>Janitorial Services</strong><em>561720</em></span></label>
+                <label class="check"><input type="checkbox" name="lanes" value="561210" /><span><strong>Facilities Support</strong><em>561210</em></span></label>
+                <label class="check"><input type="checkbox" name="lanes" value="541611" /><span><strong>Admin / Program Mgmt</strong><em>541611</em></span></label>
+                <label class="check"><input type="checkbox" name="lanes" value="561990" /><span><strong>All Other Support</strong><em>561990</em></span></label>
+                <label class="check"><input type="checkbox" name="lanes" value="541614" /><span><strong>Logistics Consulting</strong><em>541614</em></span></label>
+                <label class="check"><input type="checkbox" name="lanes" value="541512" /><span><strong>Computer Systems / IT</strong><em>541512</em></span></label>
+                <label class="check"><input type="checkbox" name="lanes" value="561611" /><span><strong>Background Check</strong><em>561611</em></span></label>
+                <label class="check"><input type="checkbox" name="lanes" value="541930" /><span><strong>Translation / Interp</strong><em>541930</em></span></label>
+              </div>
+              <p class="form-error" data-error="lanes">Select at least one lane.</p>
+            </div>
+
+            <div class="form-group">
+              <label>Geographic coverage <span class="req">*</span></label>
+              <div class="radio-group">
+                <label class="radio"><input type="radio" name="coverage" value="national" required /><span>National (all 50 states)</span></label>
+                <label class="radio"><input type="radio" name="coverage" value="regional" /><span>Regional (multiple states)</span></label>
+                <label class="radio"><input type="radio" name="coverage" value="state" /><span>Single state</span></label>
+                <label class="radio"><input type="radio" name="coverage" value="local" /><span>Local / single metro</span></label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="states_served">States you serve</label>
+              <input type="text" id="states_served" name="states_served" placeholder="e.g. IL, IN, WI, MI" />
+              <p class="form-hint">Comma-separated state codes. Leave blank if you selected National.</p>
+            </div>
+
+            <div class="form-group">
+              <label>Typical contract size you can deliver <span class="req">*</span></label>
+              <div class="radio-group">
+                <label class="radio"><input type="radio" name="contract_size" value="under_100k" required /><span>Under $100K</span></label>
+                <label class="radio"><input type="radio" name="contract_size" value="100k_500k" /><span>$100K – $500K</span></label>
+                <label class="radio"><input type="radio" name="contract_size" value="500k_2m" /><span>$500K – $2M</span></label>
+                <label class="radio"><input type="radio" name="contract_size" value="2m_10m" /><span>$2M – $10M</span></label>
+                <label class="radio"><input type="radio" name="contract_size" value="over_10m" /><span>Over $10M</span></label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="capability_summary">Capability summary <span class="req">*</span></label>
+              <textarea id="capability_summary" name="capability_summary" required rows="6" placeholder="Two to four sentences. What you do best, what differentiates you, and what kind of federal work you're positioned to deliver."></textarea>
+              <p class="form-hint"><span id="capability_count">0</span> / 1,000 characters. This becomes your capability statement if you don't have one to upload.</p>
+            </div>
+          </fieldset>
+
+          <!-- ============================================
+               STEP 4: PAST PERFORMANCE (3 contracts)
+               ============================================ -->
+          <fieldset class="form-step" data-step="4">
+            <legend class="form-step-title">
+              <span class="step-tag">Step 4 of 5</span>
+              <h2>Past performance</h2>
+              <p>List your three most relevant contracts. Federal is preferred, but commercial is fine. CPARS ratings are a strong signal.</p>
+            </legend>
+
+            <p class="form-hint" style="margin-bottom: 24px;">Need at least one contract. Two or three is better.</p>
+
+            <div id="contracts-container">
+              <!-- Contract 1 (default, removable only if more exist) -->
+              <div class="contract-block" data-contract="1">
+                <div class="contract-header">
+                  <h3>Contract 1</h3>
+                  <span class="contract-type">
+                    <label class="radio-inline"><input type="radio" name="contract1_type" value="federal" checked /><span>Federal</span></label>
+                    <label class="radio-inline"><input type="radio" name="contract1_type" value="commercial" /><span>Commercial</span></label>
+                  </span>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Client / agency <span class="req">*</span></label>
+                    <input type="text" name="contract1_client" required placeholder="e.g. Department of Veterans Affairs" />
+                  </div>
+                  <div class="form-group">
+                    <label>Contract / solicitation #</label>
+                    <input type="text" name="contract1_number" placeholder="e.g. 36C10G21D0001" style="font-family: var(--font-mono);" />
+                  </div>
+                </div>
+
+                <div class="form-row form-row-3">
+                  <div class="form-group">
+                    <label>NAICS code <span class="req">*</span></label>
+                    <input type="text" name="contract1_naics" required pattern="\d{5,6}" maxlength="6" placeholder="561720" style="font-family: var(--font-mono);" />
+                  </div>
+                  <div class="form-group">
+                    <label>Contract value ($) <span class="req">*</span></label>
+                    <input type="number" name="contract1_value" required min="0" step="1000" placeholder="250000" />
+                  </div>
+                  <div class="form-group">
+                    <label>CPARS rating</label>
+                    <select name="contract1_cpars">
+                      <option value="">N/A</option>
+                      <option>Exceptional</option>
+                      <option>Very Good</option>
+                      <option>Satisfactory</option>
+                      <option>Marginal</option>
+                      <option>Unsatisfactory</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Start date <span class="req">*</span></label>
+                    <input type="month" name="contract1_start" required />
+                  </div>
+                  <div class="form-group">
+                    <label>End date <span class="req">*</span></label>
+                    <input type="month" name="contract1_end" required />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Work description <span class="req">*</span></label>
+                  <textarea name="contract1_description" required rows="3" placeholder="What was the scope? What did you deliver?"></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label>Reference contact (name, email, phone)</label>
+                  <input type="text" name="contract1_reference" placeholder="e.g. Jane Smith, jane@va.gov, 555-555-5555" />
+                  <p class="form-hint">Someone we can verify the work with. Federal contracting officers or prime contractor program managers are best.</p>
+                </div>
+              </div>
+            </div>
+
+            <button type="button" class="btn btn-secondary" id="add-contract">
+              <span aria-hidden="true">+</span> Add another contract
+            </button>
+            <p class="form-hint" id="contract-count-hint" style="margin-top: 12px;">1 of up to 3 contracts.</p>
+          </fieldset>
+
+          <!-- ============================================
+               STEP 5: COMPLIANCE & DOCUMENTS
+               ============================================ -->
+          <fieldset class="form-step" data-step="5">
+            <legend class="form-step-title">
+              <span class="step-tag">Step 5 of 5</span>
+              <h2>Compliance &amp; documents</h2>
+              <p>SAM.gov status, insurance, certifications, and the documents we'll need to onboard you.</p>
+            </legend>
+
+            <h3 class="form-section-h3">SAM.gov status</h3>
+            <div class="form-group">
+              <label>Is your SAM.gov registration currently active? <span class="req">*</span></label>
+              <div class="radio-group">
+                <label class="radio"><input type="radio" name="sam_status" value="active" required /><span>Yes, active</span></label>
+                <label class="radio"><input type="radio" name="sam_status" value="pending" /><span>In process / pending</span></label>
+                <label class="radio"><input type="radio" name="sam_status" value="expired" /><span>Expired — renewing</span></label>
+                <label class="radio"><input type="radio" name="sam_status" value="none" /><span>Not registered</span></label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="check check-attestation">
+                <input type="checkbox" name="exclusion_attestation" required />
+                <span>I attest that this business is not debarred, suspended, or otherwise excluded from federal contracting, and that no owner or principal has been debarred within the last 3 years. <span class="req">*</span></span>
+              </label>
+            </div>
+
+            <h3 class="form-section-h3">Insurance</h3>
+            <div class="form-group">
+              <label>Which insurance do you currently carry? <span class="req">*</span></label>
+              <div class="checkbox-stack">
+                <label class="check"><input type="checkbox" name="insurance" value="gl" required /><span>General liability — $1M+ per occurrence <span class="req">*</span></span></label>
+                <label class="check"><input type="checkbox" name="insurance" value="wc" required /><span>Workers compensation (or state equivalent) <span class="req">*</span></span></label>
+                <label class="check"><input type="checkbox" name="insurance" value="pl" /><span>Professional liability / E&amp;O</span></label>
+                <label class="check"><input type="checkbox" name="insurance" value="cyber" /><span>Cyber liability (required for IT lanes)</span></label>
+                <label class="check"><input type="checkbox" name="insurance" value="auto" /><span>Commercial auto</span></label>
+                <label class="check"><input type="checkbox" name="insurance" value="umbrella" /><span>Umbrella / excess liability</span></label>
+              </div>
+            </div>
+
+            <h3 class="form-section-h3">Certifications <span style="font-family: var(--font-sans); font-weight: 400; font-size: 14px; color: var(--fg-muted);">(select all that apply)</span></h3>
+            <div class="form-group">
+              <div class="checkbox-grid">
+                <label class="check"><input type="checkbox" name="certifications" value="8a" /><span><strong>8(a) Business Development</strong><em>SBA</em></span></label>
+                <label class="check"><input type="checkbox" name="certifications" value="hubzone" /><span><strong>HUBZone</strong><em>SBA</em></span></label>
+                <label class="check"><input type="checkbox" name="certifications" value="sdvosb" /><span><strong>Service-Disabled Veteran-Owned</strong><em>SDVOSB</em></span></label>
+                <label class="check"><input type="checkbox" name="certifications" value="vosb" /><span><strong>Veteran-Owned</strong><em>VOSB</em></span></label>
+                <label class="check"><input type="checkbox" name="certifications" value="wosb" /><span><strong>Women-Owned Small Business</strong><em>WOSB</em></span></label>
+                <label class="check"><input type="checkbox" name="certifications" value="mbe" /><span><strong>Minority Business Enterprise</strong><em>MBE</em></span></label>
+                <label class="check"><input type="checkbox" name="certifications" value="dbe" /><span><strong>Disadvantaged Business Enterprise</strong><em>DBE</em></span></label>
+                <label class="check"><input type="checkbox" name="certifications" value="sbe" /><span><strong>Small Business Enterprise</strong><em>SBE</em></span></label>
+                <label class="check"><input type="checkbox" name="certifications" value="none" /><span><strong>None of the above</strong><em>—</em></span></label>
+              </div>
+            </div>
+
+            <h3 class="form-section-h3">Required documents</h3>
+            <p class="form-hint" style="margin-bottom: 20px;">PDF preferred. Max 10 MB per file. If you don't have a capability statement, we'll use what you wrote in Step 3.</p>
+
+            <div class="form-group">
+              <label class="file-upload">
+                <input type="file" name="capability_statement" accept=".pdf,.doc,.docx" data-required="true" />
+                <span class="file-upload-prompt">
+                  <strong>Capability statement</strong>
+                  <em>PDF or Word · 1–3 pages · Required</em>
+                </span>
+                <span class="file-upload-status" data-status="capability_statement">No file chosen</span>
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label class="file-upload">
+                <input type="file" name="w9" accept=".pdf,.doc,.docx" data-required="true" />
+                <span class="file-upload-prompt">
+                  <strong>W-9</strong>
+                  <em>Most recent signed copy · Required</em>
+                </span>
+                <span class="file-upload-status" data-status="w9">No file chosen</span>
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label class="file-upload">
+                <input type="file" name="insurance_cert" accept=".pdf,.doc,.docx,.jpg,.png" data-required="true" />
+                <span class="file-upload-prompt">
+                  <strong>Insurance certificate</strong>
+                  <em>ACORD 25 or equivalent · Required</em>
+                </span>
+                <span class="file-upload-status" data-status="insurance_cert">No file chosen</span>
+              </label>
+            </div>
+
+            <h3 class="form-section-h3">Optional documents</h3>
+
+            <div class="form-group">
+              <label class="file-upload">
+                <input type="file" name="cpars" accept=".pdf,.doc,.docx,.jpg,.png" />
+                <span class="file-upload-prompt">
+                  <strong>CPARS / past performance docs</strong>
+                  <em>Optional but strengthens your application</em>
+                </span>
+                <span class="file-upload-status" data-status="cpars">No file chosen</span>
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label class="file-upload">
+                <input type="file" name="certifications_docs" accept=".pdf,.doc,.docx,.jpg,.png" />
+                <span class="file-upload-prompt">
+                  <strong>Certification documents</strong>
+                  <em>8(a), HUBZone, MBE, etc. (if applicable)</em>
+                </span>
+                <span class="file-upload-status" data-status="certifications_docs">No file chosen</span>
+              </label>
+            </div>
+
+            <div class="form-group" style="margin-top: 40px;">
+              <label class="check check-attestation">
+                <input type="checkbox" name="terms" required />
+                <span>I confirm the information provided is accurate to the best of my knowledge. I understand that misrepresentation may result in removal from Sagacity Effect's vendor network and may be reported to the SBA. <span class="req">*</span></span>
+              </label>
+            </div>
+          </fieldset>
+
+          <!-- ============================================
+               FORM NAVIGATION
+               ============================================ -->
+          <div class="form-nav">
+            <button type="button" class="btn btn-ghost" id="prev-step" disabled>
+              ← Back
+            </button>
+            <span class="form-progress-text"><span id="current-step">1</span> of 5</span>
+            <button type="button" class="btn btn-primary" id="next-step">
+              Continue →
+            </button>
+            <button type="submit" class="btn btn-primary" id="submit-form" hidden>
+              Submit Application →
+            </button>
+          </div>
+
+          <!-- Status / success message -->
+          <div class="form-status" id="form-status" hidden></div>
+
+        </form>
+
+        <!-- Save status indicator -->
+        <p class="form-save-status" id="save-status" aria-live="polite">
+          <span class="save-dot"></span> Progress saved on this device
+        </p>
+
+      </div>
+    </section>
+
+    <section class="cta-strip" style="padding: 64px 0;">
+      <div class="container">
+        <h2>Not ready to apply yet?</h2>
+        <p>Send a quick note instead and we'll send you the application link.</p>
+        <div class="actions">
+          <a href="mailto:vendors@sagacityeffect.com" class="btn btn-secondary">Email vendors@sagacityeffect.com</a>
+          <a href="vendors.html" class="btn btn-ghost">← Back to Vendors</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-brand">
+        <a href="index.html" class="brand" aria-label="Sagacity Effect LLC — Home">
+          <img src="assets/logo-original.jpg" alt="Sagacity Effect logo" class="brand-img" width="180" height="auto" />
+        </a>
+        <p>A national federal prime contractor. We bridge small businesses with government contracts.</p>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="capabilities.html">Capabilities</a></li>
+          <li><a href="vendors.html">Vendors</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <ul>
+          <li><a href="mailto:contracts@sagacityeffect.com">contracts@…</a></li>
+          <li><a href="mailto:vendors@sagacityeffect.com">vendors@…</a></li>
+          <li><a href="mailto:hello@sagacityeffect.com">hello@…</a></li>
+          <li><a href="mailto:teaming@sagacityeffect.com">teaming@…</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 Sagacity Effect LLC. Chicago, IL.</span>
+      <span>SAM.gov registered · Small business prime</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
