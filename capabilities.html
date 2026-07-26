@@ -1,11 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Capabilities — Sagacity Effect LLC</title>
   <meta name="description" content="Sagacity Effect LLC federal contracting capabilities across NAICS lanes: facilities support, janitorial, admin, logistics, IT, background check, translation." />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a0a0a'/%3E%3Ctext x='50' y='65' font-family='sans-serif' font-size='52' font-weight='700' fill='white' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#f7f2e8" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#15110b" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%238b5a2b'/%3E%3Ctext x='50' y='65' font-family='serif' font-size='52' font-weight='600' font-style='italic' fill='%23fdfaf3' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E" />
+  <script>
+    (function() {
+      try {
+        var saved = localStorage.getItem('sagacity-theme');
+        var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -24,6 +40,12 @@
           <li><a href="capabilities.html" class="active">Capabilities</a></li>
           <li><a href="vendors.html">Vendors</a></li>
           <li><a href="contact.html">Contact</a></li>
+          <li>
+            <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+              <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+              <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+          </li>
         </ul>
       </nav>
     </div>
@@ -34,22 +56,23 @@
     <section class="page-hero">
       <div class="container">
         <p class="eyebrow">Capabilities</p>
-        <h1>What We Bid On, Who We Team With</h1>
-        <p class="lede">Sagacity Effect bids as a prime on federal contracts across the NAICS lanes below. We team with qualified subcontractors to deliver the work.</p>
+        <h1>What we bid on. <span class="accent">Who we team with.</span></h1>
+        <p class="lede">Sagacity Effect bids as a prime on federal contracts across the NAICS lanes below. We team with qualified subcontractors to deliver the work — anywhere in the United States.</p>
       </div>
     </section>
 
     <section>
       <div class="container">
-        <h2>NAICS Lanes</h2>
-        <p class="section-lede">These are the codes we're registered under in SAM.gov. We can bid on any federal contract tagged with one of these NAICS codes.</p>
+        <span class="section-eyebrow">NAICS Lanes</span>
+        <h2>Registered, bid-ready, nationwide.</h2>
+        <p class="section-lede">These are the codes we hold in SAM.gov. We can bid on any federal contract tagged with one of these NAICS codes.</p>
 
         <table class="cap-table">
           <thead>
             <tr>
-              <th style="width: 22%;">NAICS</th>
+              <th style="width: 18%;">NAICS</th>
               <th>Lane</th>
-              <th style="width: 24%;">Typical Contract Size</th>
+              <th style="width: 22%;">Typical Contract Size</th>
             </tr>
           </thead>
           <tbody>
@@ -98,49 +121,56 @@
       </div>
     </section>
 
-    <section>
-      <div class="container">
-        <h2>For Federal Agencies</h2>
-        <p class="section-lede">What you get when you award a contract to Sagacity Effect.</p>
+    <div class="container">
+      <div class="cap-section-with-image">
+        <div>
+          <span class="section-eyebrow">For Federal Agencies</span>
+          <h2>What you get when you award to <span class="accent">Sagacity Effect.</span></h2>
+          <p class="section-lede" style="margin-bottom: 24px;">A single prime point of contact. A vetted subcontractor network. Compliance built in from day one.</p>
 
-        <div class="two-col">
-          <div class="panel">
-            <h3>What we bring</h3>
-            <ul>
-              <li>HUBZone price preference (10% in open competition)</li>
-              <li>Sole-source award capability (up to $7M once HUBZone certified)</li>
-              <li>Full FAR / DFARS compliance from day one</li>
-              <li>Subcontractor network already in development</li>
-              <li>National reach, Chicago-based principal office</li>
-            </ul>
-          </div>
-          <div class="panel">
-            <h3>How we work</h3>
-            <ul>
-              <li>Single point of contact for prime contract management</li>
-              <li>Vetted subs across all capability lanes</li>
-              <li>Transparent subcontracting plan (FAR Subpart 19.7)</li>
-              <li>Past performance built through sub delivery</li>
-              <li>Set-aside eligible across HUBZone, 8(a) (pending), MBE (pending)</li>
-            </ul>
+          <div class="two-col">
+            <div class="panel">
+              <h3>What we bring</h3>
+              <ul>
+                <li>HUBZone price preference (10% in open competition)</li>
+                <li>Sole-source award capability (up to $7M once HUBZone certified)</li>
+                <li>Full FAR / DFARS compliance from day one</li>
+                <li>Subcontractor network already in development</li>
+                <li>National reach, Chicago-based principal office</li>
+              </ul>
+            </div>
+            <div class="panel">
+              <h3>How we work</h3>
+              <ul>
+                <li>Single point of contact for prime contract management</li>
+                <li>Vetted subs across all capability lanes</li>
+                <li>Transparent subcontracting plan (FAR Subpart 19.7)</li>
+                <li>Past performance built through sub delivery</li>
+                <li>Set-aside eligible across HUBZone, 8(a) (pending), MBE (pending)</li>
+              </ul>
+            </div>
           </div>
         </div>
+        <div class="cap-image">
+          <img src="assets/images/capabilities-bg.jpg" alt="A modern collaborative workspace" />
+        </div>
       </div>
-    </section>
+    </div>
 
     <section>
       <div class="container">
-        <h2>For Vendors</h2>
+        <span class="section-eyebrow">For Vendors</span>
+        <h2>Subcontract with us.</h2>
         <p class="section-lede">If your business can deliver in any of the NAICS lanes above, we want to talk.</p>
 
-        <div class="panel" style="background: var(--surface); padding: 32px; border-radius: 4px;">
-          <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 16px;">What we look for in subs</h3>
-          <ul style="list-style: none;">
-            <li style="padding: 8px 0 8px 28px; position: relative;">✓ Registered in SAM.gov (or in process)</li>
-            <li style="padding: 8px 0 8px 28px; position: relative;">✓ General liability insurance ($1M+)</li>
-            <li style="padding: 8px 0 8px 28px; position: relative;">✓ Workers comp (or state equivalent)</li>
-            <li style="padding: 8px 0 8px 28px; position: relative;">✓ Clean SAM.gov exclusion status</li>
-            <li style="padding: 8px 0 8px 28px; position: relative;">✓ Willingness to be a sub on a managed prime contract</li>
+        <div class="panel">
+          <h3>What we look for in subs</h3>
+          <ul>
+            <li>Registered in SAM.gov (or in process)</li>
+            <li>General liability insurance ($1M+)</li>
+            <li>Workers comp (or state equivalent)</li>
+            <li>Clean SAM.gov exclusion status</li>
+            <li>Willingness to be a sub on a managed prime contract</li>
           </ul>
           <p style="margin-top: 24px;"><a href="vendors.html" class="btn btn-primary">Apply to Join Our Network →</a></p>
         </div>
@@ -149,7 +179,7 @@
 
     <section class="cta-strip">
       <div class="container">
-        <h2>Need a HUBZone prime for your next contract?</h2>
+        <h2>Need a <span class="accent">HUBZone prime</span> for your next contract?</h2>
         <p>Let's talk about your requirements and how Sagacity Effect can team on it.</p>
         <div class="actions">
           <a href="contact.html" class="btn btn-primary">Talk to Us</a>
@@ -162,13 +192,34 @@
 
   <footer class="site-footer">
     <div class="container">
+      <div class="footer-brand">
+        <a href="index.html" class="brand" aria-label="Sagacity Effect LLC — Home">
+          <img src="assets/logo-original.jpg" alt="Sagacity Effect logo" class="brand-img" width="180" height="auto" />
+        </a>
+        <p>A national federal prime contractor. We bridge small businesses with government contracts.</p>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="capabilities.html">Capabilities</a></li>
+          <li><a href="vendors.html">Vendors</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <ul>
+          <li><a href="mailto:contracts@sagacityeffect.com">contracts@…</a></li>
+          <li><a href="mailto:vendors@sagacityeffect.com">vendors@…</a></li>
+          <li><a href="mailto:hello@sagacityeffect.com">hello@…</a></li>
+          <li><a href="mailto:teaming@sagacityeffect.com">teaming@…</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
       <span>© 2026 Sagacity Effect LLC. Chicago, IL.</span>
-      <span>
-        <a href="about.html">About</a>
-        <a href="capabilities.html">Capabilities</a>
-        <a href="vendors.html">Vendors</a>
-        <a href="contact.html">Contact</a>
-      </span>
+      <span>SAM.gov registered · Small business prime</span>
     </div>
   </footer>
 

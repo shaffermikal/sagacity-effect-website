@@ -1,12 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sagacity Effect LLC — Federal Prime Contractor</title>
-  <meta name="description" content="Sagacity Effect is a federal prime contractor that bridges small businesses with government contracts. HUBZone-eligible. National reach." />
-  <meta name="theme-color" content="#0a0a0a" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a0a0a'/%3E%3Ctext x='50' y='65' font-family='sans-serif' font-size='52' font-weight='700' fill='white' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E" />
+  <meta name="description" content="Sagacity Effect is a national federal prime contractor. We team with qualified small businesses to deliver federal contracts across logistics, facilities, IT, and professional services. Chicago, IL." />
+  <meta name="theme-color" content="#f7f2e8" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#15110b" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%238b5a2b'/%3E%3Ctext x='50' y='65' font-family='serif' font-size='52' font-weight='600' font-style='italic' fill='%23fdfaf3' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E" />
+  <script>
+    (function() {
+      try {
+        var saved = localStorage.getItem('sagacity-theme');
+        var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -25,6 +40,17 @@
           <li><a href="capabilities.html">Capabilities</a></li>
           <li><a href="vendors.html">Vendors</a></li>
           <li><a href="contact.html">Contact</a></li>
+          <li>
+            <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+              <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="4"/>
+                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+              </svg>
+              <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+              </svg>
+            </button>
+          </li>
         </ul>
       </nav>
     </div>
@@ -34,31 +60,49 @@
 
     <section class="hero">
       <div class="container">
-        <h1>We see potential.<br />We create opportunities.<br />Everybody eats.</h1>
-        <p class="lede">Sagacity Effect is a national federal prime contractor that bridges small businesses with government contracts. We win the work. You do the work. Everybody eats.</p>
-        <div class="hero-actions">
-          <a href="capabilities.html" class="btn btn-primary">For Federal Agencies →</a>
-          <a href="vendors.html" class="btn btn-secondary">For Vendors →</a>
+        <div class="hero-grid">
+          <div class="hero-content">
+            <span class="hero-eyebrow">Federal Prime Contractor · Chicago</span>
+            <h1>We see <span class="accent">potential.</span> We create <span class="accent">opportunities.</span> Everybody eats.</h1>
+            <p class="lede">Sagacity Effect is a national federal prime contractor. We team with qualified small businesses to deliver federal contracts across logistics, facilities, IT, and professional services — nationwide.</p>
+            <div class="hero-actions">
+              <a href="capabilities.html" class="btn btn-primary">For Federal Agencies →</a>
+              <a href="vendors.html" class="btn btn-secondary">For Vendors →</a>
+            </div>
+            <div class="hero-meta">
+              <span>SAM.gov registered</span>
+              <span>Small business prime</span>
+              <span>FAR / DFARS compliant</span>
+            </div>
+          </div>
+          <div class="hero-image">
+            <img src="assets/images/cityscape.jpg" alt="Chicago skyline" />
+          </div>
         </div>
       </div>
     </section>
 
     <section>
       <div class="container">
-        <p class="section-eyebrow">Why Sagacity Effect</p>
-        <h2>Built to connect — not to gatekeep.</h2>
+        <span class="section-eyebrow">Why Sagacity Effect</span>
+        <h2>Built to connect. <span class="accent">Built to deliver.</span></h2>
+        <p class="section-lede">Federal contracting rewards prime contractors with infrastructure, compliance, and capital. We build that infrastructure once — and share it across every contract we win.</p>
+
         <div class="why-grid">
-          <div class="item">
-            <h3>We bridge the gap.</h3>
-            <p>Most capable small businesses never see federal contract opportunities. We find them and route them to vendors who can deliver.</p>
+          <div class="why-card">
+            <span class="num">01 — BRIDGE</span>
+            <h3>Capability to opportunity.</h3>
+            <p>Most capable small businesses never see federal contract opportunities. We find them and route them to qualified vendors who can deliver.</p>
           </div>
-          <div class="item">
-            <h3>We build the network.</h3>
-            <p>Vetted subcontractors across NAICS lanes, ready to team. We already do the registration, the SAM.gov work, the compliance paperwork.</p>
+          <div class="why-card">
+            <span class="num">02 — NETWORK</span>
+            <h3>The subcontractor bench.</h3>
+            <p>Vetted subcontractors across every NAICS lane, ready to team. We handle SAM.gov registration, compliance paperwork, and the rest.</p>
           </div>
-          <div class="item">
-            <h3>We stay compliant.</h3>
-            <p>HUBZone-eligible. 8(a) pending. SAM.gov registered. FAR and DFARS compliant. Every contract is delivered through a properly structured prime-sub relationship.</p>
+          <div class="why-card">
+            <span class="num">03 — COMPLIANCE</span>
+            <h3>Registered and accountable.</h3>
+            <p>HUBZone-eligible. 8(a) pending. SAM.gov registered. FAR and DFARS compliant. Every contract delivered through a properly structured prime-sub relationship.</p>
           </div>
         </div>
       </div>
@@ -66,23 +110,24 @@
 
     <section>
       <div class="container">
-        <p class="section-eyebrow">How it works</p>
-        <h2>Four steps. Clear money trail.</h2>
+        <span class="section-eyebrow">How it works</span>
+        <h2>Four steps. <span class="accent">Clear money trail.</span></h2>
+
         <div class="steps">
           <div class="step">
-            <h3>We Find Opportunities</h3>
-            <p>We track SAM.gov, agency forecasts, and teaming partner requests for federal RFPs that fit our lanes.</p>
+            <h3>We find opportunities</h3>
+            <p>We track SAM.gov, agency forecasts, and teaming partner requests for RFPs that fit our lanes.</p>
           </div>
           <div class="step">
-            <h3>We Win the Contract</h3>
+            <h3>We win the contract</h3>
             <p>We bid as a HUBZone-eligible small business prime on federal contracts in our capability lanes.</p>
           </div>
           <div class="step">
-            <h3>We Subcontract the Work</h3>
+            <h3>We subcontract the work</h3>
             <p>We team with qualified subs who deliver the actual services. Pay for performance — never for promises.</p>
           </div>
           <div class="step">
-            <h3>We Manage the Prime</h3>
+            <h3>We manage the prime</h3>
             <p>Sagacity Effect manages the prime contract, compliance, and reporting. You deliver the service.</p>
           </div>
         </div>
@@ -91,7 +136,7 @@
 
     <section class="cta-strip">
       <div class="container">
-        <h2>Ready to work with us?</h2>
+        <h2>Ready to <span class="accent">work with us?</span></h2>
         <p>Federal agencies — let's talk about your contract needs. Vendors — apply to join our subcontractor network.</p>
         <div class="actions">
           <a href="contact.html" class="btn btn-primary">Talk to Us</a>
@@ -104,13 +149,34 @@
 
   <footer class="site-footer">
     <div class="container">
+      <div class="footer-brand">
+        <a href="index.html" class="brand" aria-label="Sagacity Effect LLC — Home">
+          <img src="assets/logo-original.jpg" alt="Sagacity Effect logo" class="brand-img" width="180" height="auto" />
+        </a>
+        <p>A national federal prime contractor. We bridge small businesses with government contracts.</p>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="capabilities.html">Capabilities</a></li>
+          <li><a href="vendors.html">Vendors</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <ul>
+          <li><a href="mailto:contracts@sagacityeffect.com">contracts@…</a></li>
+          <li><a href="mailto:vendors@sagacityeffect.com">vendors@…</a></li>
+          <li><a href="mailto:hello@sagacityeffect.com">hello@…</a></li>
+          <li><a href="mailto:teaming@sagacityeffect.com">teaming@…</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
       <span>© 2026 Sagacity Effect LLC. Chicago, IL.</span>
-      <span>
-        <a href="about.html">About</a>
-        <a href="capabilities.html">Capabilities</a>
-        <a href="vendors.html">Vendors</a>
-        <a href="contact.html">Contact</a>
-      </span>
+      <span>SAM.gov registered · Small business prime</span>
     </div>
   </footer>
 

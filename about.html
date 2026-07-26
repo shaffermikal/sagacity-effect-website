@@ -1,11 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About — Sagacity Effect LLC</title>
-  <meta name="description" content="About Sagacity Effect LLC. Mikal Shaffer founded Sagacity Effect in 2026 to bridge the gap between small businesses and federal contracts." />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a0a0a'/%3E%3Ctext x='50' y='65' font-family='sans-serif' font-size='52' font-weight='700' fill='white' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E" />
+  <meta name="description" content="Mikal Shaffer founded Sagacity Effect in 2026 to bridge the gap between small businesses and federal contracts. Chicago-based federal prime contractor." />
+  <meta name="theme-color" content="#f7f2e8" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#15110b" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%238b5a2b'/%3E%3Ctext x='50' y='65' font-family='serif' font-size='52' font-weight='600' font-style='italic' fill='%23fdfaf3' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E" />
+  <script>
+    (function() {
+      try {
+        var saved = localStorage.getItem('sagacity-theme');
+        var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -24,6 +40,12 @@
           <li><a href="capabilities.html">Capabilities</a></li>
           <li><a href="vendors.html">Vendors</a></li>
           <li><a href="contact.html">Contact</a></li>
+          <li>
+            <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+              <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+              <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+          </li>
         </ul>
       </nav>
     </div>
@@ -34,7 +56,7 @@
     <section class="page-hero">
       <div class="container">
         <p class="eyebrow">About</p>
-        <h1>Bridging Small Businesses and Federal Contracts</h1>
+        <h1>Bridging small businesses and <span class="accent">federal contracts.</span></h1>
         <p class="lede">Mikal Shaffer founded Sagacity Effect in 2026 with a simple observation: government contract opportunities exist everywhere — but most small business owners never see them.</p>
       </div>
     </section>
@@ -42,17 +64,20 @@
     <section>
       <div class="container">
         <div class="story">
-          <div class="col">
-            <h3>Our Story</h3>
+          <div class="story-img">
+            <img src="assets/images/workspace.jpg" alt="A professional workspace" />
+          </div>
+          <div class="story-copy">
+            <h3>Our story</h3>
             <p>After watching countless capable vendors — including his own medical courier business — get bypassed by federal procurement, Mikal built Sagacity Effect to be the bridge.</p>
             <p>We do the work of finding opportunities, registering as a federal prime, and subcontracting the delivery to qualified vendors who already have the skills.</p>
             <blockquote class="pull-quote">"We see potential. We create opportunities. Everybody eats."</blockquote>
             <p>That's not marketing. It's the operating principle. Every contract we win creates work for vendors who wouldn't have found it alone. Every vendor we onboard strengthens the network for the next contract.</p>
-          </div>
-          <div class="col">
+
             <h3>Why this model works</h3>
             <p>Federal contracting favors prime contractors with infrastructure, compliance, and capital. Small businesses rarely have all three. Sagacity Effect builds that infrastructure once — then shares it across an unlimited number of contracts.</p>
             <p>The result: agencies get a single point of contact with vetted subs. Vendors get paid for delivery without bearing prime-contract risk. We get paid for managing the prime. Everybody wins — including the small businesses who would never have seen these contracts.</p>
+
             <div class="bio">
               <div class="bio-avatar">MS</div>
               <div class="bio-content">
@@ -67,7 +92,7 @@
 
     <section class="cta-strip">
       <div class="container">
-        <h2>Want to know more?</h2>
+        <h2>Want to know <span class="accent">more?</span></h2>
         <p>Talk to us about agency contracts or vendor onboarding.</p>
         <div class="actions">
           <a href="contact.html" class="btn btn-primary">Contact Us</a>
@@ -80,13 +105,34 @@
 
   <footer class="site-footer">
     <div class="container">
+      <div class="footer-brand">
+        <a href="index.html" class="brand" aria-label="Sagacity Effect LLC — Home">
+          <img src="assets/logo-original.jpg" alt="Sagacity Effect logo" class="brand-img" width="180" height="auto" />
+        </a>
+        <p>A national federal prime contractor. We bridge small businesses with government contracts.</p>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="capabilities.html">Capabilities</a></li>
+          <li><a href="vendors.html">Vendors</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <ul>
+          <li><a href="mailto:contracts@sagacityeffect.com">contracts@…</a></li>
+          <li><a href="mailto:vendors@sagacityeffect.com">vendors@…</a></li>
+          <li><a href="mailto:hello@sagacityeffect.com">hello@…</a></li>
+          <li><a href="mailto:teaming@sagacityeffect.com">teaming@…</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
       <span>© 2026 Sagacity Effect LLC. Chicago, IL.</span>
-      <span>
-        <a href="about.html">About</a>
-        <a href="capabilities.html">Capabilities</a>
-        <a href="vendors.html">Vendors</a>
-        <a href="contact.html">Contact</a>
-      </span>
+      <span>SAM.gov registered · Small business prime</span>
     </div>
   </footer>
 
