@@ -666,6 +666,7 @@ section .section-lede {
 @media (max-width: 880px) {
   .story { grid-template-columns: 1fr; gap: 32px; }
   .story-img { aspect-ratio: 16 / 10; }
+  .story-img-wide { aspect-ratio: 16 / 10; }
 }
 
 /* ============================================================
@@ -1029,6 +1030,14 @@ section .section-lede {
 }
 
 /* ============================================================
+   ABOUT PAGE — wide story image (e.g. skylines)
+   ============================================================ */
+
+.story-img-wide {
+  aspect-ratio: 4 / 3;
+}
+
+/* ============================================================
    CAPABILITIES PAGE — image section
    ============================================================ */
 
@@ -1054,6 +1063,54 @@ section .section-lede {
 @media (max-width: 880px) {
   .cap-section-with-image { grid-template-columns: 1fr; gap: 32px; }
   .cap-section-with-image .cap-image { order: -1; aspect-ratio: 16 / 10; }
+}
+
+/* ============================================================
+   WORKFORCE GALLERY (capabilities page)
+   ============================================================ */
+
+.workforce-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 48px;
+}
+.workforce-card {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.workforce-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.workforce-card .workforce-img {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+.workforce-card .workforce-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.workforce-card .workforce-body {
+  padding: 24px;
+}
+.workforce-card h3 {
+  margin-bottom: 8px;
+  font-style: italic;
+}
+.workforce-card p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--fg-muted);
+}
+@media (max-width: 880px) {
+  .workforce-grid { grid-template-columns: 1fr; gap: 20px; }
 }
 
 /* ============================================================
